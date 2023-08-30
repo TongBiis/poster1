@@ -1,0 +1,63 @@
+{% extends 'sitelogic/base.html' %}
+
+{% block body %}
+    {% block header %}
+        <nav style="border-bottom-left-radius: 3px; border-bottom-right-radius: 3px"
+             class="navbar navbar-expand-lg navbar-dark bg-dark text-light pb-2">
+            <div class="container-fluid">
+                <ul class="navbar-nav">
+                    <li class="navbar-item">
+
+                        <a class="navbar-brand" href="{% url 'home_page' %}"><img
+                                src="https://fontmeme.com/permalink/221209/f54fbdff5b5f67774719ec7e44ed24ca.png"
+                                alt="8-bit-wonder-font"></a>
+                    </li>
+                    <li class="navbar-item">
+                        <a class="nav-link active" href="{% url 'about_site' %}">О сайте</a>
+
+                    </li>
+                    <li class="navbar-item">
+                        <a class="nav-link active" href="{% url 'add_post' %}">Добавить пост</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Форумы
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for t in cats %}
+                                <a class="dropdown-item" href="{{ t.get_absolute_url }}">{{ t.category_name }}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                </ul>
+                <div class="navbar-nav">
+                    <form>
+                        <input class="search_field" type="search" placeholder="Search..." aria-label="Search"
+                               name="search">
+                    </form>
+                </div>
+            </div>
+        </nav>
+    {% endblock %}
+    <div class="container">
+    <div class="row align-items-start">
+        <div class="col-5 block_shadow mg_and_pd_10px general_block">
+            <div class="col-md-5">
+                <h2>Популярное</h2>
+            </div>
+            {% for popular_posts in content_popular %}
+                <div class="col-md-11 mg_and_pd_10px block_shadow discus_block">
+                    <a class="title_link" href="{{ popular_posts.get_absolute_url }}">{{ popular_posts.post_title }}</a>
+                    <a class="nick_link" href="{{ popular_posts.get_absolute_url }}"
+                       style="font-size: 0.85rem; display: block; text-decoration: none; color: black">TongBiis</a>
+                    <a class="views_nick_count_link" href="{{ popular_posts.get_absolute_url }}"
+                       style="font-size: 0.7rem; text-decoration: none; color: gray; display: block">9 min ago
+                        Views: {{ popular_posts.views_count }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+</html>

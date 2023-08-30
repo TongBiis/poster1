@@ -1,0 +1,192 @@
+{% extends 'sitelogic/base.html' %}
+{% block title %}Обсуждения{% endblock %}
+
+{% block body %}
+    <nav style="border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; margin-bottom: 40px"
+         class="navbar navbar-expand-lg navbar-dark bg-dark text-light pb-2">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="navbar-item">
+
+                    <a class="navbar-brand" href="{% url 'home_page' %}"><img
+                            src="https://fontmeme.com/permalink/221209/f54fbdff5b5f67774719ec7e44ed24ca.png"
+                            alt="8-bit-wonder-font"></a>
+                </li>
+                <li class="navbar-item">
+                    <a class="nav-link active" href="{% url 'about_site' %}">О сайте</a>
+
+                </li>
+                <li class="navbar-item">
+                    <a class="nav-link active" href="{% url 'add_post' %}">Добавить пост</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Форумы
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for t in cats %}
+                            <a class="dropdown-item" href="{{ t.get_absolute_url }}">{{ t.category_name }}</a>
+                        {% endfor %}
+                    </div>
+                </li>
+            </ul>
+            <div class="navbar-nav">
+                <form action="{% url 'home_page' %}">
+                    <input class="search_field" type="search" placeholder="Search..." aria-label="Search"
+                           name="search">
+                </form>
+            </div>
+        </div>
+    </nav>
+        <form method="get">{% csrf_token %}
+            <button name="pop">Популярное</button>
+        </form>
+
+        <form method="get">{% csrf_token %}
+            <button name="def">Обычное</button>
+        </form>
+        <div class="container">
+        <div class="row">
+            <div class="col-11" style="background-color: rgb(241,241,241); text-align: center; font-size: 1.4rem; border-bottom: 1px rgb(230,230,230) solid">{% for forum_name in cats %} {% if forum_name.slug == cat_selected %} {{ forum_name.category_name }} {% endif %} {% endfor %}</div>
+            <div class="col-3" style="background-color: rgb(241,241,241); font-size: 1.4rem; border-bottom: 1px rgb(230,230,230) solid; padding-top: 1em"><div style="text-align: center">Форумы</div>
+                {% for t in cats %}
+                        {% if t.slug == cat_selected %}
+                            <p class="inactive_forum_link">{{ t.category_name }}</p>
+                        {% else %}
+                            <a class="forum_link zz" href="{{ t.get_absolute_url }}">{{ t.category_name }}</a>
+                        {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="col-8 general_block_shadow general_block">
+            <br>
+                {% for forum_posts in posts %}
+                    <div class="col-md-11 mg_and_pd_10px discus_block_shadow discus_block">
+                        <a class="title_link" href="{{ forum_posts.get_absolute_url }}">{{ forum_posts.post_title }}</a>
+                        <br>
+                        <p class="nick_link" href="{{ forum_posts.get_absolute_url }}">Автор: TongBiis,
+                            <span style="font-size: 0.7rem; color: gray"> 9 минут назад, Просмотры: {{ forum_posts.views_count }} </span>
+                        </p>
+                    </div>
+                {% endfor %}
+            <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{#    <div class="container">#}
+{#        <div class="row align-items-start">#}
+{#            <div class="col-6 mg_and_pd_10px i_border">#}
+{##}
+{#                <div class="col-md-6">#}
+{#                    <h2 style="border: 3px solid #212529">#}
+{#                        {% for forum_name in cats %}{% if forum_name.slug == cat_selected %}#}
+{#                            {{ forum_name.category_name }}{% endif %}{% endfor %}</h2>#}
+{#                </div>#}
+{#                {% for forum_posts in posts %}#}
+{#                    <a href="{{ forum_posts.get_absolute_url }}">{{ forum_posts.post_title }}</a>---------------#}
+{#                    {{ forum_posts.views_count }}<br>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+{#    <div class="container">#}
+{#        <div class="row align-items-start">#}
+{#            <div class="col-6 block_shadow mg_and_pd_10px general_block">#}
+{#                <div class="col-md-5">#}
+{#                    <h2>{% for forum_name in cats %} {% if forum_name.slug == cat_selected %} {{ forum_name.category_name }} {% endif %} {% endfor %}</h2>#}
+{#                </div>#}
+{#                {% for forum_posts in posts %}#}
+{#                    <div class="col-md-11 mg_and_pd_10px block_shadow discus_block">#}
+{#                        <a class="title_link" href="{{ forum_posts.get_absolute_url }}">{{ forum_posts.post_title }}</a>#}
+{#                        <a class="nick_link" href="{{ forum_posts.get_absolute_url }}">TongBiis</a>#}
+{#                        <a class="views_nick_count_link" href="{{ forum_posts.get_absolute_url }}">9 min ago#}
+{#                            Views: {{ forum_posts.views_count }}</a>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+
+    {#                <div class="col-5 mg_and_pd_10px i_border">#}
+    {#                    <div class="col-md-6">#}
+    {#                        <h1 style="border: 3px solid #212529">Популярное</h1>#}
+    {#                    </div>#}
+    {#                    {% for popular_posts in content_popular %}#}
+    {#                        <a style="border: 1px solid #212529; text-decoration: none; color: #212529"#}
+    {#                           href="{{ popular_posts.get_absolute_url }}">{{ popular_posts.post_title }}</a>------------#}
+    {#                        {{ popular_posts.views_count }}<br>#}
+    {#                    {% endfor %}#}
+    {#                </div>#}
+
+    {#    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">#}
+    {#        <div class="container-fluid">#}
+    {#            <a class="navbar-brand rr" href="{% url 'home_page' %}">Posterik</a>#}
+    {#            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"#}
+    {#                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">#}
+    {#                <span class="navbar-toggler-icon"></span>#}
+    {#            </button>#}
+    {#            <div class="collapse navbar-collapse" id="navbarCollapse">#}
+    {#                <ul class="navbar-nav me-auto mb-2 mb-md-0">#}
+    {#                    <li class="nav-item">#}
+    {#                        <a class="nav-link active rr" aria-current="page" href="{% url 'about_site' %}">О сайте</a>#}
+    {#                    </li>#}
+    {#                    <li class="nav-item dropdown">#}
+    {#                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"#}
+    {#                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+    {#                            Форумы#}
+    {#                        </a>#}
+    {##}
+    {#                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
+    {#                            {% for t in cats %}#}
+    {#                                <a class="dropdown-item" href="{{ t.get_absolute_url }}">{{ t.category_name }}</a>#}
+    {#                            {% endfor %}#}
+    {#                        </div>#}
+    {#                    </li>#}
+    {#                </ul>#}
+    {#                <ul>#}
+    {#                    <li class="navbar-nav me-auto mb-2 mb-md-0">#}
+    {#                        <a class="nav-link active" href="{% url 'cabinet' %}">Пользователь</a>#}
+    {#                        <p class="navbar-text">|</p><a class="nav-link active" href="#">Войти</a>#}
+    {#                    </li>#}
+    {#                </ul>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </nav>#}
+    {#    <div class="album py-5 bg-light">#}
+    {#        <div class="container">#}
+    {#            <div class="row">#}
+    {#                {% for pic in posts %}#}
+    {#                    <div class="col-md-4 card_margin">#}
+    {#                        <div class="card shadow">#}
+    {#                            <img class="bd-placeholder-img card-img-top"#}
+    {#                                 src="{{ pic.post_media.url }}" width="350px" height="350px"#}
+    {#                                 alt="random_thumbnail">#}
+    {#                            </img>#}
+    {#                            <div class="card-body">#}
+    {#                                <p class="card-text">{{ pic.post_content|slice:45 }}</p>#}
+    {#                            </div>#}
+    {#                            <div class="d-flex justify-content-between align-items-center">#}
+    {#                                <div class="btn-group gg">#}
+    {#                                    <button type="button" class="btn btn-sm btn-outline-secondary"><a class="plink"#}
+    {#                                                                                                      href="{{ pic.get_absolute_url }}">View</a>#}
+    {#                                    </button>#}
+    {#                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>#}
+    {#                                </div>#}
+    {#                                <small class="text-muted dd">author: TongBiis#}
+    {#                                    <br>#}
+    {#                                    <small class="text-muted">9 mins</small>#}
+    {#                                </small>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                {% endfor %}#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+{#{% endblock %}#}

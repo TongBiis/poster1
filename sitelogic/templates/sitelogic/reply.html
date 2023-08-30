@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="comment reply">
+    <p>{{ comment.comment_content }}</p>
+    <a href="#" class="reply">Ответить</a>
+    <div class="reply-form">
+        <form method="post" action="{% url 'add_comment' %}">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value="{{ post.id }}">
+            <input type="hidden" name="parent_comment_id" value="{{ comment.id }}">
+            <textarea name="comment_content"></textarea>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+    {% if comment.replies %}
+        <div class="replies">
+            {% for reply in comment.replies.all %}
+                {% include 'reply.html' with comment=reply %}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,414 @@
+/*.gg {*/
+/*    padding-bottom: 20px;*/
+/*    padding-left: 10px;*/
+/*}*/
+
+/*.dd {*/
+/*    padding-right: 10px;*/
+/*}*/
+
+/*.plink {*/
+/*    text-decoration: none;*/
+/*    color: #777777;*/
+/*    display: inline-block;*/
+/*    position: relative;*/
+/*    z-index: 1;*/
+/*    padding: 5px 9px 5px 11px;*/
+/*    margin: -5px -9px -5px -11px;*/
+/*}*/
+
+/*.plink:hover {*/
+/*    color: white;*/
+/*    transition-delay: 0.1s;*/
+/*}*/
+
+/*.card_margin {*/
+/*    margin-bottom: 25px;*/
+/*}*/
+
+/*.rr {*/
+/*    margin-bottom: 30px;*/
+/*}*/
+
+/*.t {*/
+/*    color: #ffae04;*/
+/*}*/
+
+/*.fff {*/
+/*    font-size: 1.3rem;*/
+/*}*/
+
+/*.ggg {*/
+/*    font-size: 1.1rem;*/
+/*}*/
+
+body {
+    background-color: rgb(183, 183, 183);
+}
+
+
+.mg_and_pd_10px {
+    margin-left: 50px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+
+.search_field {
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+
+.general_block {
+    background-color: #f6f6f6;
+}
+
+
+.discus_block {
+    display: block;
+    background-color: #ffffff;
+    border-radius: 2px;
+}
+
+
+.general_block_shadow_ {
+    box-shadow: 0 0 4px rgb(128 128 128 /20%);
+}
+
+
+.discus_block_shadow {
+    box-shadow: 0 0 4px rgb(128 128 128 /20%);
+}
+
+
+.discus_block_shadow:hover {
+    box-shadow: 0 0 3px rgb(128 128 128 /70%);
+}
+
+
+.vv {
+    text-decoration: none;
+    color: black;
+}
+
+
+.hr_forums {
+    color: rgb(150, 150, 150);
+}
+
+
+.forum_link {
+    font-size: 0.88rem;
+    color: rgb(45, 45, 45);
+    text-decoration: none;
+    display: block;
+}
+
+
+.forum_link:hover {
+    color: rgb(185, 30, 30);
+}
+
+
+.inactive_forum_link {
+    font-size: 1.2rem;
+    margin-top: 3px;
+    margin-bottom: 1px;
+    border-bottom: solid 1px rgb(150, 150, 150);
+}
+
+
+.zz {
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-bottom: 1px solid rgb(170, 170, 170);
+}
+
+
+.title_link {
+    text-decoration: none;
+    color: rgb(70, 70, 70);
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: sans-serif;
+}
+
+
+.title_link:hover {
+    color: rgb(185, 30, 30);
+}
+
+
+.nick_link {
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: black;
+}
+
+
+.nick_link:hover {
+    color: black;
+}
+
+
+.views_nick_count_link {
+    font-size: 0.7rem;
+    text-decoration: none;
+    color: gray;
+    cursor: default
+}
+
+
+.views_nick_count_link:hover {
+    color: gray;
+    cursor: default;
+}
+
+
+.comm_answer {
+    color: black;
+    display: inline-block;
+    background-color: #ccc;
+}
+
+.comm_answer:hover {
+    background-color: #999;
+    color: #fff;
+    cursor: pointer;
+}
+
+.hg {
+    width: 55%;
+    height: 100px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+.comment_form {
+    border: 0;
+    border-bottom: 1px solid #000;
+    background-color: rgba(0, 0, 0, 0);
+    outline: 0;
+    resize: none;
+}
+
+.ta {
+    width: 100%; /* Ширина текстового поля равна ширине контейнера */
+    height: 100%; /* Высота текстового поля равна высоте контейнера */
+    resize: none; /* Отключаем возможность изменять размеры текстового поля */
+    display: inline-block;
+}
+
+.title {
+    font-size: 2em;
+    color: #1f1f1f;
+}
+
+.hr_posts {
+    border: none;
+    border-top: 1px solid rgb(75, 75, 75);
+    border-bottom: 1px solid rgb(45, 45, 45);
+    background-color: rgb(55, 55, 55);
+}
+
+/*div {*/
+/*    border: 2px solid black;*/
+/*}*/
+
+.check {
+    margin-right: 5px;
+}
+
+.separator {
+    display: flex;
+    flex-direction: column;
+}
+
+.separator > div {
+    width: 100%;
+}
+
+.separator > .top {
+    height: 1px;
+    background-color: rgb(170, 170, 170);
+}
+
+.separator > .center {
+    height: 1px;
+    background-color: rgb(50, 50, 50);
+}
+
+.separator > .bottom {
+    height: 1px;
+    background-color: rgb(170, 170, 170);
+}
+
+.lb {
+    padding-left: 20px;
+    /* необходим для формирования позиций линий */
+    position: relative;
+    /* блок будет занимать ширину по размеру контента в нём*/
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.lb::after {
+    content: "";
+    width: 4px;
+    position: absolute;
+    left: 50%;
+    border-left: red;
+    border-right: green;
+    margin: 20px 0;
+    padding: 1px;
+    height: 2px;
+    border: none;
+    border-left: red;
+    border-right: green;
+    background: orange;
+    opacity: 1;
+}
+
+.form-inline {
+    display: inline-block;
+}
+
+.btn-submit {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.vertical-line::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 100%;
+    background-color: black;
+}
+
+/*a::before {*/
+/*    content: "♥";*/
+/*}*/
+
+.hr-three-color {
+    margin: 20px 0;
+    padding: 1px;
+    height: 2px;
+    border: none;
+    border-top: 2px solid #ddd;
+    border-bottom: 2px solid #000;
+    background: orange;
+    opacity: 1;
+}
+
+/*.vl {*/
+/*    border-left: 6px solid green;*/
+/*    height: 500px;*/
+/*    position: absolute;*/
+/*    left: 20%;*/
+/*    margin-left: -3px;*/
+/*    top: 0;*/
+/*}*/
+
+/*.div_padding {*/
+/*    margin-left: 10px;*/
+/*}*/
+
+/*div {*/
+/*    border-left: black 1px solid;*/
+/*}*/
+
+/*p {*/
+/*    border: black 1px solid;*/
+/*    margin-left: 10px;*/
+/*}*/
+
+/*span {*/
+/*    border: black 1px solid;*/
+/*}*/
+
+/*.i_border {*/
+/*    border: 5px solid #212529;*/
+/*}*/
+
+/*.search_field::-webkit-input-placeholder {*/
+/*    color: #000000;*/
+/*}*/
+
+/*!** {*!*/
+/*!*   margin: 0;*!*/
+/*!*   box-sizing: border-box;*!*/
+/*!*}*!*/
+/*.post-wrap {*/
+/*   max-width: 1120px;*/
+/*   margin: 0 auto;*/
+/*   display: flex;*/
+/*   justify-content: center;*/
+/*   flex-wrap: wrap;*/
+/*}*/
+
+/*.post-item {*/
+/*   padding: 10px;*/
+/*}*/
+/*.post-item-wrap {*/
+/*   background: #212529;*/
+/*    border-radius: 20px;*/
+/*}*/
+
+/*.post-item-wrap:after {*/
+/*   content: "";*/
+/*   position: absolute;*/
+/*   top: 0;*/
+/*   left: 0;*/
+/*   width: 100%;*/
+/*   height: 100%;*/
+/*   z-index: -1;*/
+/*   background: #A69888;*/
+/*   transform: rotate(1deg);*/
+/*   transform-origin: left bottom;*/
+/*   transition: .3s ease-in-out;*/
+/*}*/
+/*.post-item-wrap:hover:after {*/
+/*   top: 5px;*/
+/*   left: 5px;*/
+/*   transform: rotate(2deg);*/
+/*}*/
+/*.post-link {*/
+/*    text-decoration: none;*/
+/*    display: block;*/
+/*    padding: 30px;*/
+/*}*/
+
+/*.post-title {*/
+/*    color: #dfdfff;*/
+/*    margin-bottom: 15px;*/
+/*    transition: .3s ease-in-out;*/
+/*}*/
+
+/*.post-item-wrap:hover .post-title {*/
+/*    color: #BC9458;*/
+/*}*/
+
+/*.post-content {*/
+/*    color: #A69888;*/
+/*    font-size: 14px;*/
+/*}*/
+
+/*@media (min-width: 768px) {*/
+/*    .post-item {*/
+/*        flex-basis: 50%;*/
+/*        flex-shrink: 0;*/
+/*    }*/
+/*}*/
+
+/*@media (min-width: 960px) {*/
+/*    .post-item {*/
+/*        flex-basis: 33.333333333%;*/
+/*    }*/
+/*}*/

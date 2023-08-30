@@ -1,0 +1,157 @@
+{% extends 'sitelogic/base.html' %}
+
+{% block body %}
+    {% block header %}
+        {#        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">#}
+        {#            <div class="container-fluid">#}
+        {#                <a class="navbar-brand rr" href="{% url 'home_page' %}">Posterik</a>#}
+        {#                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"#}
+        {#                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">#}
+        {#                    <span class="navbar-toggler-icon"></span>#}
+        {#                </button>#}
+        {#                <div class="collapse navbar-collapse" id="navbarCollapse">#}
+        {#                    <ul class="navbar-nav me-auto mb-2 mb-md-0">#}
+        {#                        <li class="nav-item">#}
+        {#                            <a class="nav-link active rr" aria-current="page" href="{% url 'about_site' %}">О сайте</a>#}
+        {#                        </li>#}
+        {#                        <li class="nav-item dropdown">#}
+        {#                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"#}
+        {#                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+        {#                                Форумы#}
+        {#                            </a>#}
+        {##}
+        {#                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
+        {#                                {% for t in cats %}#}
+        {#                                    <a class="dropdown-item" href="{{ t.get_absolute_url }}">{{ t.category_name }}</a>#}
+        {#                                {% endfor %}#}
+        {#                            </div>#}
+        {#                        </li>#}
+        {#                    </ul>#}
+        {#                    <ul>#}
+        {#                        <li class="navbar-nav me-auto mb-2 mb-md-0">#}
+        {#                            <a class="nav-link active" href="{% url 'cabinet' %}">Пользователь</a>#}
+        {#                            <p class="navbar-text">|</p><a class="nav-link active" href="#">Войти</a>#}
+        {#                        </li>#}
+        {#                        <li>#}
+        {#                            <form action="{% url 'home_page' %}">#}
+        {#                                <input type="search" placeholder="Search" aria-label="Search" name="search">#}
+        {#                                <button type="submit">Поиск</button>#}
+        {#                            </form>#}
+        {#                        </li>#}
+        {#                    </ul>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </nav>#}
+        <nav style="border-bottom-left-radius: 3px; border-bottom-right-radius: 3px"
+             class="navbar navbar-expand-lg navbar-dark bg-dark text-light pb-2">
+            <div class="container-fluid">
+                <ul class="navbar-nav">
+                    <li class="navbar-item">
+
+                        <a class="navbar-brand" href="{% url 'home_page' %}"><img
+                                src="https://fontmeme.com/permalink/221209/f54fbdff5b5f67774719ec7e44ed24ca.png"
+                                alt="8-bit-wonder-font"></a>
+                    </li>
+                    <li class="navbar-item">
+                        <a class="nav-link active" href="{% url 'about_site' %}">О сайте</a>
+
+                    </li>
+                    <li class="navbar-item">
+                        <a class="nav-link active" href="{% url 'add_post' %}">Добавить пост</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Форумы
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for t in cats %}
+                                <a class="dropdown-item" href="{{ t.get_absolute_url }}">{{ t.category_name }}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                </ul>
+                <div class="navbar-nav">
+                    <form>
+                        <input class="search_field" type="search" placeholder="Search..." aria-label="Search"
+                               name="search">
+                    </form>
+                </div>
+            </div>
+        </nav>
+    {% endblock %}
+    {#        {{ title }}<br>#}
+    {#        <hr>#}
+    {#        {{ post.post_content | safe }}#}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-11"
+                 style="background-color: rgb(241,241,241); text-align: center; font-size: 1.4rem; border-bottom: 1px rgb(230,230,230) solid">
+                Главная
+            </div>
+            <div class="col-3 lb" style="background-color: rgb(241,241,241); font-size: 1.4rem; border-bottom: 1px rgb(230,230,230) solid; padding-top: 1em">
+                <div style="text-align: center">Форумы</div>
+                {% for t in cats %}
+                    <a class="forum_link zz" href="{{ t.get_absolute_url }}">{{ t.category_name }}</a>
+                {% endfor %}
+            </div>
+            <div class="col-8 general_block_shadow general_block">
+                <br>
+                <span class="title">{{ title }}</span>
+                <br>
+                <hr>
+                <p class="div_padding">{{ post.post_content | safe }}</p>
+                <br>
+                <div class="separator">
+                    <div class="top"></div>
+                    <div class="center"></div>
+                    <div class="bottom"></div>
+                </div>
+                <p>Добавить комментарий: </p>
+                <hr class="hr-three-color">
+                <div class="form-container">
+                    <form class="ta" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.media }}
+                        {{ form.comment_content }}
+                        <button class="btn-submit" id="btn-sbm" type="submit" value="Добавить комментарий"
+                                name="add_comm">добавить
+                        </button>
+                    </form>
+                </div>
+                <div>
+                    <p>Комментарии:</p>
+                    {% for comm in comments %}
+                        <p data-parent-id="{{ comm.uuid }}">{{ comm.comment_content }}</p>
+                        <p>Ответы: </p>
+                        {% for child_comment in comm.children %}
+                            <p>{{ child_comment.comment_content }}</p>
+                            <br>
+                        {% endfor %}
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.comment_content }}
+                            {#                            <input type="hidden" name="pa" value="{{ comm.id }}">#}
+                            {#                            <input type="submit" value="Reply" class="btn" name="add_comm">#}
+                            <button id="btn-sbm" type="submit" value="{{ comm.id }}" name="pa">добавить</button>
+                        </form>
+                        <div class="separator">
+                            <div class="top"></div>
+                            <div class="center"></div>
+                            <div class="bottom"></div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <form style="display: inline-block;">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+    </form>
+    <button type="submit" style="display: inline-block; vertical-align: top;">Submit</button>
+{% endblock %}
